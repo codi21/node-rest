@@ -39,6 +39,7 @@ app.put('/usuario/:id', function (req, res) {
 app.delete('/usuario', function (req, res) {
   res.json('deleteUsuario')//Por lo general ahora se cambia de estado
 })
-app.listen(process.env.PORT, () => {
-    console.log('Escuchando puerto: ',3000);
+
+app.listen(port , () => {
+    console.log(`Escuchando puerto ${port} `);
 });
