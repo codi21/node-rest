@@ -40,6 +40,6 @@ app.delete('/usuario', function (req, res) {
   res.json('deleteUsuario')//Por lo general ahora se cambia de estado
 })
 
-app.listen(port , () => {
-    console.log(`Escuchando puerto ${port} `);
+app.listen(process.env.PORT , () => {
+    console.log('Escuchando puerto: ', process.env.PORT);
 });
