@@ -1,45 +1,23 @@
 const express = require('express');
+const mongoose = require('mongoose');
+const app = express(); //routear mas facil y demas 
 const bodyParser= require('body-parser');
+app.use(bodyParser.urlencoded({extended: false}));//middleware
+app.use(bodyParser.json());
 require('./config/config');
-const app = express() //routear mas facil y demas 
+
+const cors = require('cors');
+app.use(cors());
+app.use(require('./routes/usuario'));
 //parse aplication/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))//middleware
 
 //parse aplication/json
-app.use(bodyParser.json())
  
-app.get('/usuario', function (req, res) {
-  res.json('getUsuario')
-})
- 
-app.post('/usuario', function (req, res) {
-    let body = req.body;
-    if ( body.nombre === undefined)  {
-        res.status(400).json(
-            {
-                ok: false ,
-                mensaje: 'El nombre es necesario'
-            }
-        );
-    // falta el nombre
-    }
-  res.json(
-      {
-          persona: body
-      })//Crear
-})
-app.put('/usuario/:id', function (req, res) {
-   let id = req.params.id;
-  res.json({
-    id
-  }
-  
-  );//actualizar
-})
-app.delete('/usuario', function (req, res) {
-  res.json('deleteUsuario')//Por lo general ahora se cambia de estado
-})
-
+mongoose.connect(process.env.URLDB,{ useNewUrlParser: true , useUnifiedTopology : true} ,(err,res) => {
+    if ( err ) throw err;
+    console.log('Base de datos ONLINE');
+});
+mongoose.set('useCreateIndex', true);
 app.listen(process.env.PORT , () => {
     console.log('Escuchando puerto: ', process.env.PORT);
 });
