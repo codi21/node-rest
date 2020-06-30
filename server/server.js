@@ -6,8 +6,8 @@ app.use(bodyParser.urlencoded({extended: false}));//middleware
 app.use(bodyParser.json());
 require('./config/config');
 
-const cors = require('cors');
-app.use(cors());
+//const cors = require('cors');
+//app.use(cors());
 app.use(require('./routes/usuario'));
 //parse aplication/x-www-form-urlencoded
 
